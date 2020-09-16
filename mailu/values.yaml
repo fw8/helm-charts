@@ -151,6 +151,9 @@ postfix:
     limits:
       memory: 2Gi
       cpu: 500m
+  overrides:
+    postfix.cf: |
+      # overrides for postfix
 
 dovecot:
   # logLevel: WARNING

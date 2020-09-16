@@ -40,6 +40,8 @@ spec:
           - mountPath: /queue
             name: data
             subPath: mailqueue
+          - mountPath: /overrides
+            name: overrides
         env:
           - name: LOG_LEVEL
             value: {{ default .Values.logLevel .Values.postfix.logLevel }}
@@ -102,6 +104,9 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: {{ include "mailu.claimName" . }}
+        - name: overrides
+          configMap:
+            name: {{ include "mailu.fullname" . }}-postfix-overrides
   strategy:
     type: RollingUpdate
     rollingUpdate:
