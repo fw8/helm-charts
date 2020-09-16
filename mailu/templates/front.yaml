@@ -40,6 +40,8 @@ spec:
         volumeMounts:
           - name: certs
             mountPath: /certs
+          - name: overrides
+            mountPath: /overrides
         env:
           - name: LOG_LEVEL
             value: {{ default .Values.logLevel .Values.front.logLevel }}
@@ -157,6 +159,9 @@ spec:
               - key: tls.key
                 path: key.pem
             secretName: {{ include "mailu.fullname" . }}-certificates
+        - name: overrides
+          configMap:
+            name: {{ include "mailu.fullname" . }}-nginx-overrides
       restartPolicy: Always
       terminationGracePeriodSeconds: 60
   strategy:

@@ -43,6 +43,8 @@ spec:
           - name: data
             mountPath: /mail
             subPath: dovecotmail
+          - name: overrides
+            mountPath: /overrides
         env:
           - name: LOG_LEVEL
             value: {{ default .Values.logLevel .Values.dovecot.logLevel }}
@@ -111,6 +113,9 @@ spec:
         - name: data
           persistentVolumeClaim:
             claimName: {{ include "mailu.claimName" . }}
+        - name: overrides
+          configMap:
+            name: {{ include "mailu.fullname" . }}-dovecot-overrides
   strategy:
     type: RollingUpdate
     rollingUpdate:

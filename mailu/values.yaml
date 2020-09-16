@@ -105,12 +105,15 @@ front:
     # tag defaults to mailuVersion
     # tag: master
   resources:
-    requests: 
+    requests:
       memory: 100Mi
       cpu: 100m
     limits:
       memory: 200Mi
       cpu: 200m
+  overrides:
+    nginx.conf: |
+      # overrides for nginx
 
 admin:
   # logLevel: WARNING
@@ -168,6 +171,9 @@ dovecot:
     limits:
       memory: 500Mi
       cpu: 500m
+  overrides:
+    dovecot.conf: |
+      # overrides for dovecot
 
 rspamd:
   # logLevel: WARNING
@@ -182,6 +188,9 @@ rspamd:
     limits:
       memory: 200Mi
       cpu: 200m
+  overrides:
+    actions.conf: |
+      # overrides for rspamd
 
 clamav:
   enabled: true
